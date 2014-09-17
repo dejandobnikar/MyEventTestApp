@@ -159,8 +159,7 @@ public class MyActivity extends Activity
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_my, container, false);
 
-            rootView.setBackgroundColor(Color.CYAN);
-            
+            rootView.setBackgroundColor(Color.YELLOW);
 
             TextView tv = (TextView) rootView.findViewById(R.id.section_label );
             tv.setText("Section number: " + getArguments().getInt(ARG_SECTION_NUMBER));
