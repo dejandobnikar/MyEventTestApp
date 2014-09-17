@@ -17,7 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.lang.reflect.GenericArrayType;
 
 import de.greenrobot.event.EventBus;
 
@@ -137,6 +141,7 @@ public class MyActivity extends Activity
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         private TextView tvMessage;
+        private Button btnShow;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -161,6 +166,7 @@ public class MyActivity extends Activity
             TextView tv = (TextView) rootView.findViewById(R.id.section_label );
             tv.setText("Section number: " + getArguments().getInt(ARG_SECTION_NUMBER));
 
+            btnShow = (Button) rootView.findViewById(R.id.btnShow);
             tvMessage = (TextView) rootView.findViewById(R.id.tvMessage);
 
             return rootView;
@@ -173,6 +179,18 @@ public class MyActivity extends Activity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
 
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+
+            btnShow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), "bla", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         @Override
         public void onResume() {
