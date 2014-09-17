@@ -1,0 +1,4 @@
+MyEventTestApp
+==============
+
+First github project
