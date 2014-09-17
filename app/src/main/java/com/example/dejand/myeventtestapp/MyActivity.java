@@ -187,7 +187,7 @@ public class MyActivity extends Activity
             btnShow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "blaedittoast", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "toast text", Toast.LENGTH_SHORT).show();
                 }
             });
         }
