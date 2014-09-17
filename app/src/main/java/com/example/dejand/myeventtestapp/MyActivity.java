@@ -178,6 +178,12 @@ public class MyActivity extends Activity
         public void onResume() {
             super.onResume();
 
+
+            Intent i = new Intent(getActivity(), EventService.class);
+            i.putExtra(EventService.ARG_FRAGMENT, getArguments().getInt(ARG_SECTION_NUMBER));
+
+            getActivity().startService(i);
+
             EventBus bus = EventBus.getDefault();
             bus.register(this);
         }
@@ -190,7 +196,7 @@ public class MyActivity extends Activity
         }
 
         public void onEventMainThread(EventNotification notification) {
-            tvMessage.setText("Event: " + notification.getEventNum());
+            tvMessage.setText("Event: " + notification.getEventNum() + " fragment: " + notification.getFragment());
         }
 
     }
