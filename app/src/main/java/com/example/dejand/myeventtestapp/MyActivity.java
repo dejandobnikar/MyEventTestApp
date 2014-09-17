@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -17,6 +18,8 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import de.greenrobot.event.EventBus;
 
 
 public class MyActivity extends Activity
@@ -102,6 +105,27 @@ public class MyActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Intent i = new Intent(this, EventService.class);
+        i.putExtra(EventService.ARG_COMMAND, EventService.COMMAND_START);
+
+        startService(i);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Intent i = new Intent(this, EventService.class);
+        i.putExtra(EventService.ARG_COMMAND, EventService.COMMAND_STOP);
+
+        startService(i);
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -111,6 +135,8 @@ public class MyActivity extends Activity
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+
+        private TextView tvMessage;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -135,6 +161,7 @@ public class MyActivity extends Activity
             TextView tv = (TextView) rootView.findViewById(R.id.section_label );
             tv.setText("Section number: " + getArguments().getInt(ARG_SECTION_NUMBER));
 
+            tvMessage = (TextView) rootView.findViewById(R.id.tvMessage);
 
             return rootView;
         }
@@ -145,6 +172,27 @@ public class MyActivity extends Activity
             ((MyActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+            EventBus bus = EventBus.getDefault();
+            bus.register(this);
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            EventBus bus = EventBus.getDefault();
+            bus.unregister(this);
+        }
+
+        public void onEventMainThread(EventNotification notification) {
+            tvMessage.setText("Event: " + notification.getEventNum());
+        }
+
     }
 
 }
