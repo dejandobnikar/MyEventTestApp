@@ -19,10 +19,13 @@ public class EventService extends Service {
         return null;
     }
 
+    public static final String ARG_FRAGMENT = "fragment";
     public static final String ARG_COMMAND = "command";
     public static final int COMMAND_START = 1;
     public static final int COMMAND_STOP = 2;
+    public static final int FRAGMENT_NUM = 3;
     private int i = 0;
+    private int fragment = 0;
 
     private Timer timer;
 
@@ -35,13 +38,20 @@ public class EventService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        int command = intent.getIntExtra(ARG_COMMAND, COMMAND_STOP);
 
-        if (command == COMMAND_START) {
-            startNotifications();
-        } else {
-            stopNotifications();
+
+        if (intent.hasExtra(ARG_COMMAND)) {
+            int command = intent.getIntExtra(ARG_COMMAND, COMMAND_STOP);
+            if (command == COMMAND_START) {
+                startNotifications();
+            } else {
+                stopNotifications();
+            }
         }
+        else if (intent.hasExtra(ARG_FRAGMENT)) {
+            fragment = intent.getIntExtra(ARG_FRAGMENT, 0);
+        }
+
 
         return START_STICKY;
     }
@@ -65,7 +75,7 @@ public class EventService extends Service {
                 @Override
                 public void run() {
                     EventBus bus = EventBus.getDefault();
-                    bus.post(new EventNotification(++i));
+                    bus.post(new EventNotification(++i, fragment));
                 }
             }, 1000, 1000);
         }

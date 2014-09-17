@@ -6,10 +6,12 @@ package com.example.dejand.myeventtestapp;
 public class EventNotification {
 
     private int eventNum;
+    private int fragment;
 
 
-    public EventNotification(int i) {
+    public EventNotification(int i, int fragment) {
         this.eventNum = i;
+        this.fragment = fragment;
     }
 
     public int getEventNum() {
@@ -18,5 +20,14 @@ public class EventNotification {
 
     public void setEventNum(int eventNum) {
         this.eventNum = eventNum;
+    }
+
+
+    public int getFragment() {
+        return fragment;
+    }
+
+    public void setFragment(int fragment) {
+        this.fragment = fragment;
     }
 }
