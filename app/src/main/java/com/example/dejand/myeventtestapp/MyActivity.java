@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -162,6 +163,8 @@ public class MyActivity extends Activity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_my, container, false);
+
+            rootView.setBackgroundColor(Color.YELLOW);
 
             TextView tv = (TextView) rootView.findViewById(R.id.section_label );
             tv.setText("Section number: " + getArguments().getInt(ARG_SECTION_NUMBER));
