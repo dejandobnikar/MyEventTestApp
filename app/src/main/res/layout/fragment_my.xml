@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
+        android:textColor="#f0f0f0"
         android:id="@+id/tvMessage"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
