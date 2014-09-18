@@ -40,6 +40,7 @@ public class EventService extends Service {
 
 
         if (intent == null ) {
+            
             return START_NOT_STICKY;
         }
 
