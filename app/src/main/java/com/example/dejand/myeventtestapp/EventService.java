@@ -39,7 +39,7 @@ public class EventService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-        if (intent == null ) return START_NOT_STICKY;
+        if (intent == null ) return START_STICKY;
 
         if (intent.hasExtra(ARG_COMMAND)) {
             int command = intent.getIntExtra(ARG_COMMAND, COMMAND_STOP);
